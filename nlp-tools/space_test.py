@@ -37,6 +37,6 @@ for term in term_list:
     parsed_words = process.parse(words)
 
     process.np_sub_chunks(parsed_words)
-    x = process.return_sub_chunks(lemmas=False)
+    x = process.return_sub_chunks(lower=False)
 
     print(x)
