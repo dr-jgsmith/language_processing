@@ -47,15 +47,15 @@ term_list = ['climate change', 'adaptation', 'agriculture', 'Famine', 'Food_secu
 
 The list of terms are used as search terms for collecting Wikipedia article summaries.  The code below iterates through a list of terms, collects the summaries for each entry and appends to a list for later processing.
 ```
-    for term in term_list:
-	    #Initialize Search
-	    search = HtmlMapper()
+for term in term_list:
+	#Initialize Search
+	search = HtmlMapper()
 	     
-	    #Search wiki - returns json/text response
-	    response = search.search_wiki(term) 
+	#Search wiki - returns json/text response
+	response = search.search_wiki(term) 
 	    
-	    #Append response data to list
-	    resp_data.append(response)
+	#Append response data to list
+	resp_data.append(response)
     
 ```
 Summary text are collected and accessed via `resp_data` , a Python list containing the article summary.  The list of summaries can then be based to the `TransformText()` by iterating over each item in the summaries list.
