@@ -1,11 +1,11 @@
 #Spire - NLP - Tools
+---
 Table of Contents:
 
 
 [TOC]
 
 #Introduction
-
 -------------
 Spire is a set of modules written in Python 3.6 for solving various natural language processing tasks. Like [TextBlob1](https://textblob.readthedocs.io), Spire uses [NLTK](http://www.nltk.org/), and in some places uses TextBlob instead. Spire also uses the [Spacy](https://spacy.io) natural language processing platform for larger scale text processing. Spire comes with interfaces for mining text data (e.g. Wikipedia, RSS News, National Weather Service, Google Scholar), this includes crawling and scraping website content. Results are generated in JSON, with the next version outputing JSON-LD following [schema.org](http://schema.org/) entries, and Facebook's [Open Graph Protocol](http://opengraphprotocol.org/). 
 
@@ -18,7 +18,6 @@ Spire development is sponsored in part by [USDA-NIFA](https://nifa.usda.gov/), [
 ----------
 
 #Installation
-
 -------------
 Spire does not have a pip/easy_install version. This means you will need to install NLTK 3.0, TextBlob and Spacy. The required packages can be installed using pip
 
@@ -45,7 +44,6 @@ Now that the dependencies have been installed, you can download or clone this re
 -------------------
 
 #Getting Started
-
 -------------------
 To get started, lets open the **main.py** file in your Python IDE. Run the **main.py** file - `$ python main.py`, and check your results. The sample main.py runs through a series of NLP experiments to help you get started. 
 
@@ -195,7 +193,6 @@ For more information on specific methods for each of the primary classes, please
 
 
 #TransformText.py
-
 -------------------
 
 The TransformText module provides a number of methods for interacting with text data. The primary set of basic language processing tools simply provides a common way for working with TextBlob (an easy to use wrapper for NLTK), NLTK itself, and Spacy.
@@ -335,7 +332,6 @@ Finally, the results are passed to the `return_sub_chunks()` method that returns
 -------------------
 
 #HtmlMapper.py
-
 -------------------
 The HtmlMapper module provides a number of useful functions for collecting and extracting text data from various sources. Currently, Spire comes with access methods to Wikipedia article summaries, RSS Streams from News, Finance and National Weather Service. 
 
@@ -423,7 +419,6 @@ self.newsurls = {
 -------------------
 
 #SDRCake.py
-
 -------------------
 SDRCake is currently an experimental approach to generating sparse distributed arrays of data. The sparse arrays are stacked and converted to bitmap images that can be modeled for pooling spatially explicit semantic features.  
 
