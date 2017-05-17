@@ -45,7 +45,6 @@ Now that the dependencies have been installed, you can download or clone this re
 -------------------
 
 ## Getting Started
--------------------
 To get started, lets open the **main.py** file in your Python IDE. Run the **main.py** file - `$ python main.py`, and check your results. The sample main.py runs through a series of NLP experiments to help you get started. 
 
 You will notice that our two primary modules `HtmlMapper` and `TransformText` are imported.
