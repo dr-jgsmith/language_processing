@@ -1,5 +1,5 @@
 # Spire - NLP - Tools
-[TOC]
+
 # Table of contents
 1. [Introduction](#introduction)
 2. [Installation](#installation)
