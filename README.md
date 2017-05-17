@@ -1,5 +1,5 @@
 # Spire - NLP - Tools
----
+[TOC]
 # Table of contents
 1. [Introduction](#introduction)
 2. [Installation](#installation)
@@ -9,7 +9,6 @@
 6. [SDRCake](#sdrcake)
 
 ## Introduction
--------------
 Spire is a set of modules written in Python 3.6 for solving various natural language processing tasks. Like [TextBlob1](https://textblob.readthedocs.io), Spire uses [NLTK](http://www.nltk.org/), and in some places uses TextBlob instead. Spire also uses the [Spacy](https://spacy.io) natural language processing platform for larger scale text processing. Spire comes with interfaces for mining text data (e.g. Wikipedia, RSS News, National Weather Service, Google Scholar), this includes crawling and scraping website content. Results are generated in JSON, with the next version outputing JSON-LD following [schema.org](http://schema.org/) entries, and Facebook's [Open Graph Protocol](http://opengraphprotocol.org/). 
 
 The end goal of Spire is to provide a relatively easy to use set of tools to generate structured data from unstructured data (i.e. text) for conducting natural language understanding experiments, cognitive mapping from text, bootstrapping metadata to existing web content, as well as event or anomaly detection. 
@@ -21,7 +20,6 @@ Spire development is sponsored in part by [USDA-NIFA](https://nifa.usda.gov/), [
 ----------
 
 ## Installation
--------------
 Spire does not have a pip/easy_install version. This means you will need to install NLTK 3.0, TextBlob and Spacy. The required packages can be installed using pip
 
     $ pip install nltk
@@ -195,9 +193,7 @@ For more information on specific methods for each of the primary classes, please
 ----------
 
 
-## TransformText.py
--------------------
-
+## TransformText
 The TransformText module provides a number of methods for interacting with text data. The primary set of basic language processing tools simply provides a common way for working with TextBlob (an easy to use wrapper for NLTK), NLTK itself, and Spacy.
 
 > **Note:** Future iterations of Spire will include integration with a Sparse Distributed Representations module (*see:* SDRCake).
@@ -209,7 +205,6 @@ text = ['A disaster is a serious disruption of the functioning of a community or
 
 
 # Initialize TransformText Class
----
 The text string is passed as a variable or directly into TransformText(text). From this point, all of the TransformText methods are available for stemming, tokenization, parsing, tagging, etc.
 ```
 def get_sentences(self):
@@ -241,8 +236,7 @@ def simple_tagger(self, text=None):
 
 These methods are simply interfaces for accessing the TextBlob API and NLTK. These methods are useful for conducting some baseline evaluation of a rudimentary NLP solution. The methods serve as a the standard for improving accuracy and speed of output. They also provide a common model for interacting with all of the different NLP packages. 
 
-Cleaning Text
----
+# Cleaning Text
 All of these methods take a raw text string (or list of strings) as input. However, there is no guarantee that these strings are not stacked with unnecessary characters. For example, parsing through an html file results in inaccurate parse results. To solve for this, we assume that all text passed  will be malformed or include irrelevant characters. The `clean_html()` method provide support for removing these characters (e.g. html tags, css and javascript).
 
 ```
@@ -281,8 +275,7 @@ def clean_html(self, html):
 
 The result is a text blob stripped of any html characters. Now, we can use the additional methods to perform some essential operations on our text data. 
 
-Tagging and Parsing
--------
+# Tagging and Parsing
 While there are several ways carry out parsing and tagging operations in Spire, the preferred default method uses Spacy for the tagging, and NLTK Tree Traverse method to parse and capture tagged data.
 
 ```
@@ -334,8 +327,7 @@ Finally, the results are passed to the `return_sub_chunks()` method that returns
 
 -------------------
 
-HtmlMapper.py
--------------------
+## HtmlMapper
 The HtmlMapper module provides a number of useful functions for collecting and extracting text data from various sources. Currently, Spire comes with access methods to Wikipedia article summaries, RSS Streams from News, Finance and National Weather Service. 
 
 Additionally, a rudimentary search function is available using Faroo API. To use the web or news search through Faroo, you will need to visit their site and request API key. Finally, there is a very simple web crawler tool that can be used to index and scrape website content.
@@ -347,8 +339,7 @@ def __init__(self, term=None, start_url=None)
 ```
 This lets you choose one input field, either using a **term** for search, or starting url for performing a crawl-n-scrape.
 
-Crawl and Scrape
---
+# Crawl and Scrape
 The crawl and scrape can be done by providing a full url with an ending backslash. For  example, scraping USDA-NIFA would begin by passing the url string as `"https://nifa.usda.gov/"` This url can serve as a seed site for initializing the crawl. It is passed to the `get_seed_links()` method
 
 ```
@@ -388,16 +379,14 @@ This method returns a list of links to feed the next method that performs the UR
 
 Finally, the results from the link scrape can be iterated over to fetch the HTML documents from each link in the list using the `get_raw_html()` or `get_data_from_link()` methods. The results output a binary, or text representation of the HTML document.  These can then be passed to the `TransformText` class and stripped of HTML characters as described in the **cleaning** section.
 
-Wikipedia Search
---
+# Wikipedia Search
 Currently Spire comes with a very simple implementation of the Wikipedia Python Package. It simply implements the search and retrieve summary method from the package. This is extremely useful for testing your different NLP methods.
 
 Pass a search term or phrase as string type into the `search_wiki()` method. This will return the article summary or none if there is a **disambiguation Exception** or not found.
 
 > **Note:** The Wikipedia API Python package should not be used for massive data scrapping. It is possible to use the Wiki Terms dump to generate training data for a neural net or Bayesian network. But you will need to manage the rate limits.
 
-RSS Streams
---
+# RSS Streams
 The RSSStreams class uses the Python Feedparser package to grab structured news and financial services data. 
 
 > **Note:** This class is under reconstruction to make it easier to add RSS feeds on the fly. Currently, the class relies on feeds being hard-coded in the constructor method.
@@ -421,8 +410,7 @@ self.newsurls = {
 
 -------------------
 
-SDRCake.py
--------------------
+## SDRCake
 SDRCake is currently an experimental approach to generating sparse distributed arrays of data. The sparse arrays are stacked and converted to bitmap images that can be modeled for pooling spatially explicit semantic features.  
 
 In the figure below, partial least squares is used for image classification of pooled data. In the same manner, texts can be represented as visual (spatial) and time (temporal) explicit representations.
