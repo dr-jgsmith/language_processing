@@ -217,14 +217,14 @@ def get_bigrams(self):
 	return self.t_text.ngrams(n=2)
 
 def get_trigrams(self):
-    return self.t_text.ngrams(n=3)
+    	return self.t_text.ngrams(n=3)
 
 def get_np_chunks(self, text=None):
-    if text == None:
-	    return self.t_text.noun_phrases
-    else:
-	    self.t_text = TextBlob(text)
-        return self.t_text.noun_phrases
+    	if text == None:
+    		return self.t_text.noun_phrases
+    	else:
+		self.t_text = TextBlob(text)
+	return self.t_text.noun_phrases
 
 def simple_tagger(self, text=None):
 	if text == None:
@@ -282,44 +282,44 @@ While there are several ways carry out parsing and tagging operations in Spire, 
 def space_tagger(self, text_doc):
 	self.docs = []
         
-    doc = self.nlp(text_doc) #load text
+    	doc = self.nlp(text_doc) #load text
         
-    for word in doc:
-	    seq = (word.text, word.tag_)
-        self.docs.append(seq)
+    	for word in doc:
+		seq = (word.text, word.tag_)
+        	self.docs.append(seq)
         
-    return self.docs
+    	return self.docs
 ```
 This results in a list of tuples with the word and corresponding parts-of-speech. This list is passed to the `parse(tagged_doc)` method which returns a parse tree that can be traversed rather quickly.
 ```
 def parse(self, tagged_text):
 	cp = nltk.RegexpParser(self.grammar_II)
-    self.result = cp.parse(tagged_text)
-    return self.result
+    	self.result = cp.parse(tagged_text)
+    	return self.result
 ```
 As you might have noticed, this method makes use of the formal grammar defined in the constructor method for the `TransformText class` Traversing the tree performed in the `np_sub_chunk()` method which stands for Noun Phrase Sub Chunk which simply extracts noun-phrases from a text based upon the grammar rules.
 ```
 def np_sub_chunks(self, result):
 	"""
-    Finds NP (nounphrase) leaf nodes of a chunk tree.
-    Takes on the result list from the re_parse_chunker function.
+    	Finds NP (nounphrase) leaf nodes of a chunk tree.
+    	Takes on the result list from the re_parse_chunker function.
         
 	Checks to see if object in sentence tree has a label. 
-    Items without labels are ignored.
-    """
-    self.clean_list = []
+    	Items without labels are ignored.
+    	"""
+    	self.clean_list = []
         
-    #uses the nltk.Tree class and tree class methods | worth reading 
-     for tree in result.subtrees():
-	     phrases = []
-         #load label for each expression - labels are defined by the grammar attribute
-         phrases.append(tree.label())
+    	#uses the nltk.Tree class and tree class methods | worth reading 
+     	for tree in result.subtrees():
+		phrases = []
+         	#load label for each expression - labels are defined by the grammar attribute
+         	phrases.append(tree.label())
             
          for i in tree.pos():
-	         phrases.append(i[0][0])
-               
-      self.sub_chunks.append(phrases)
-      return self.sub_chunks
+	        phrases.append(i[0][0])
+         
+	 self.sub_chunks.append(phrases)
+	 return self.sub_chunks
 ```
 Finally, the results are passed to the `return_sub_chunks()` method that returns the complete list of retained phrases and a unique set of phrases. These can be saved using json.dumps() or passed into a CSV file or SQL DB.
 
@@ -346,32 +346,31 @@ The crawl and scrape can be done by providing a full url with an ending backslas
 def get_seed_links(self):
 	self.start_list = []
 
-    self.start_list.append(self.start_url)      
-    s = requests.Session()
-    s.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.131 Safari/537.36'
+	self.start_list.append(self.start_url)      
+	s = requests.Session()
+	s.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.131 Safari/537.36'
 
-    r = s.get(self.start_url)
-    self.c = r.content
-
-    soup = BeautifulSoup(self.c)
-
-    for link in soup.find_all("a"):
-	    data = link.get("href")
+	r = s.get(self.start_url)
+	self.c = r.content
+	soup = BeautifulSoup(self.c)
+	
+	for link in soup.find_all("a"):
+		data = link.get("href")
         if data == None:
 	        pass
-	    elif data[:5] == "https":
-		    row = (self.start_url, data + "/")
-            self.edges.append(row)
-            self.start_list.append(data)
+	elif data[:5] == "https":
+		row = (self.start_url, data + "/")
+            	self.edges.append(row)
+            	self.start_list.append(data)
         elif data[:1] == "/":
-            new = self.start_url + data[1:]
-            row = (self.start_url, new)
-            self.edges.append(row)
-            self.start_list.append(new)
+            	new = self.start_url + data[1:]
+            	row = (self.start_url, new)
+            	self.edges.append(row)
+            	self.start_list.append(new)
          else:
-            pass
+            	pass
 
-    return self.start_list
+    	return self.start_list
 ```
 This method returns a list of links to feed the next method that performs the URL fetch and scrape.  The link list is then passed to `deep_link_scrape(url_list)`
 
@@ -395,7 +394,7 @@ The RSSStreams class uses the Python Feedparser package to grab structured news 
 self.newsurls = {
     'apnews': 'http://hosted2.ap.org/atom/APDEFAULT/3d281c11a76b4ad082fe88aa0db04909',
     'googlenews': 'http://news.google.com/?output=rss',
-            'reutersBiz': 'http://feeds.reuters.com/reuters/businessNews',
+    'reutersBiz': 'http://feeds.reuters.com/reuters/businessNews',
     'yahoonews': 'http://news.yahoo.com/rss/',
     'disasters': 'http://www.gdacs.org/xml/rss.xml',
     'reutersMoney': 'http://feeds.reuters.com/news/wealth',
